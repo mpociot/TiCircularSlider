@@ -1,0 +1,18 @@
+#
+# this is your module manifest and used by Titanium
+# during compilation, packaging, distribution, etc.
+#
+version: 1.0
+apiversion: 2
+description: My module
+author: Manuel Lehner
+license: MIT
+copyright: 2014
+
+
+# these should not be edited
+name: android
+moduleid: de.marcelpociot.circularslider
+guid: 92ea5ecb-d462-433c-9967-90275ff0e99f
+platform: android
+minsdk: 3.2.0.GA
