@@ -1,94 +1,38 @@
-TiCircularSlider
-===========================================
+# TiCircularSlider
 
+## About
+TiCircularSlider is a native module for Titanium for iOS and Android. It uses [EFCircularSlider](https://github.com/eliotfowler/EFCircularSlider) on iOS and [CircularSeekBar](https://github.com/RaghavSood/AndroidCircularSeekBar) on Android. Within this module they share the same API.
 
-Circular slider with many customizations.
-Wrapper module for EFCircularSlider.
+## Quick Start
 
-<img src="images/demo.gif" />
+### Installation [![gitTio](http://gitt.io/badge.png)](http://gitt.io/component/de.marcelpociot.circularslider)
+Download the latest distribution ZIP-file and consult the [Titanium Documentation](http://docs.appcelerator.com/titanium/latest/#!/guide/Using_a_Module) on how install it, or simply use the [gitTio CLI](http://gitt.io/cli):
+
+`$ gittio install de.marcelpociot.circularslider`
 
 ### Usage
+```javascript
+var TiCircularSlider = require('de.marcelpociot.circularslider');
 
-TiCircularProgress is pretty much a ProgressView replacement.
+var sliderView = TiCircularSlider.createView({
+	height: 250,
+	width: 250,
+	lineWidth: 5,
+	filledColor: 'blue',
+	unfilledColor: 'grey'
+});
+sliderView.addEventListener('change',function(e){
+	Ti.API.info( "Value is: ", e.value );
+});
+win.add( sliderView );
+```
 
-	var TiCircularSlider = require('de.marcelpociot.circularslider');
+### [iOS](ios)
+Author: Marcel Pociot ([mpociot](https://github.com/mpociot/))
 
-	var sliderView = TiCircularSlider.createView({
-		top: 200,
-		left: 50,
-		height: 250,
-		width: 250,
-		lineWidth: 5,
-		handleColor: 'red',
-		filledColor: '#d7d7d7',
-		unfilledColor: '#black'
-	});
-	sliderView.addEventListener('change',function(e)
-	{
-		Ti.API.info( "Value is: ", e.value );
-	});
-	win.add( sliderView );
-	
+### [Android](android)
+Author: Manuel Lehner ([manumaticx](https://github.com/manumaticx/))
 
-## Options
-
-
-#### lineWidth
-
-Type: `Float`  
-Default: `5`
-
-The circle's line width.
-
-
-#### minimumValue
-
-Type: `Float`  
-Default: `0.0`
-
-
-#### maximumValue
-
-Type: `Float`  
-Default: `100.0`
-
-#### handleColor
-
-Type: `Color`  
-Default: `red`
-
-Color for the slider handle.
-
-
-#### filledColor
-
-Type: `Color`  
-Default: `red`
-
-Color for the filled (selected) area of the slider.
-
-#### unfilledColor
-
-Type: `Color`  
-Default: `black`
-
-Color for the unfilled (unselected) area of the slider.
-
-## Events
-
-### change
-Fired everytime the selection changes.
-
-##### value
-Type: `Float`   
-The current selected value
-
-
-ABOUT THE AUTHOR
-========================
-I'm a web enthusiast located in Germany and in charge of http://www.titaniumcontrols.com
-
-Follow me on twitter: @marcelpociot / @TitaniumCTRLs
+## License: MIT
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/mpociot/ticircularslider/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
