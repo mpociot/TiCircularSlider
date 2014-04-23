@@ -1,4 +1,4 @@
-# TiCircularSlider
+# TiCircularSlider [![Titanium](http://www-static.appcelerator.com/badges/titanium-git-badge-sq.png)](http://www.appcelerator.com/titanium/)
 
 ## About
 TiCircularSlider is a native module for Titanium for iOS and Android. It uses [EFCircularSlider](https://github.com/eliotfowler/EFCircularSlider) on iOS and [CircularSeekBar](https://github.com/RaghavSood/AndroidCircularSeekBar) on Android. Within this module they share the same API.
