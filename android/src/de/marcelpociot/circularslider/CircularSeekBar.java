@@ -6,6 +6,8 @@ package de.marcelpociot.circularslider;
  * @date 26 January, 2013
  */
 
+import org.appcelerator.titanium.util.Log;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -54,6 +56,9 @@ public class CircularSeekBar extends View {
 	
 	/** The padding for the view */
 	private int padding;
+	
+	/** The minimum progress amount */
+	private int minProgress = 0;
 	
 	/** The maximum progress amount */
 	private int maxProgress = 100;
@@ -240,10 +245,7 @@ public class CircularSeekBar extends View {
 		width = getWidth(); // Get View Width
 		height = getHeight();// Get View Height
 
-		int size = (width > height) ? height : width; // Choose the smaller
-														// between width and
-														// height to make a
-														// square
+		int size = ((width > height) ? height : width) - 25;
 
 		cx = width / 2; // Center X for circle
 		cy = height / 2; // Center Y for circle
@@ -342,7 +344,7 @@ public class CircularSeekBar extends View {
 	public void setAngle(int angle) {
 		this.angle = angle;
 		float donePercent = (((float) this.angle) / 360) * 100;
-		float progress = (donePercent / 100) * getMaxProgress();
+		float progress = (donePercent / 100) * (getMaxProgress() - getMinProgress()) + getMinProgress();
 		setProgressPercent(Math.round(donePercent));
 		CALLED_FROM_ANGLE = true;
 		setProgress(Math.round(progress));
@@ -384,16 +386,6 @@ public class CircularSeekBar extends View {
 	 */
 	public void setBarWidth(int barWidth) {
 		this.barWidth = barWidth;
-	}
-	
-	/**
-	 * Sets the barColor.
-	 * 
-	 * @param barWidth
-	 *            the new bar width
-	 */
-	public void setBarColor(int barWidth) {
-		
 	}
 
 	/**
@@ -438,6 +430,25 @@ public class CircularSeekBar extends View {
 	public void setMaxProgress(int maxProgress) {
 		this.maxProgress = maxProgress;
 	}
+	
+	/**
+	 * Gets the min progress.
+	 * 
+	 * @return the min progress
+	 */
+	public int getMinProgress() {
+		return minProgress;
+	}
+
+	/**
+	 * Sets the min progress.
+	 * 
+	 * @param minProgress
+	 *            the new min progress
+	 */
+	public void setMinProgress(int minProgress) {
+		this.minProgress = minProgress;
+	}
 
 	/**
 	 * Gets the progress.
@@ -458,14 +469,16 @@ public class CircularSeekBar extends View {
 		if (this.progress != progress) {
 			this.progress = progress;
 			if (!CALLED_FROM_ANGLE) {
-				int newPercent = (this.progress / this.maxProgress) * 100;
-				int newAngle = (newPercent / 100) * 360;
+				int newPercent = (this.progress * 100) / (this.maxProgress - this.minProgress );
+				int newAngle = (newPercent * 360) / 100 ;
 				this.setAngle(newAngle);
 				this.setProgressPercent(newPercent);
 			}
+			this.invalidate();
 			mListener.onProgressChange(this, this.getProgress());
 			CALLED_FROM_ANGLE = false;
 		}
+		
 	}
 
 	/**

@@ -26,6 +26,8 @@ public class View extends TiUIView
 	private static final String LCAT = "TiCircularSliderModule";
 	
 	private static final String PROPERTY_VALUE = "value";
+	private static final String PROPERTY_MIN_VALUE = "minimumValue";
+	private static final String PROPERTY_MAX_VALUE = "maximumValue";
 	private static final String PROPERTY_LINE_WIDTH = "lineWidth";
 	private static final String PROPERTY_COLOR_FILLED = "filledColor";
 	private static final String PROPERTY_COLOR_UNFILLED = "unfilledColor";
@@ -64,6 +66,31 @@ public class View extends TiUIView
 		
 		CircularSeekBar csb = (CircularSeekBar) getNativeView();
 		
+		if (props.containsKey(PROPERTY_MIN_VALUE)){
+			int min = TiConvert.toInt(props.get(PROPERTY_MIN_VALUE));
+			csb.setMinProgress(min);
+			/*
+			if (min >= 0){
+				csb.setMinProgress(min);
+			}else{
+				Log.e(LCAT, "Negative minimum value is not allowed, will set to 0.");
+			}
+			*/
+			
+		}
+		
+		if (props.containsKey(PROPERTY_MAX_VALUE)){
+			int max = TiConvert.toInt(props.getInt(PROPERTY_MAX_VALUE));
+			if (max >= csb.getMinProgress()){
+				csb.setMaxProgress(max);
+			}else{
+				Log.e(LCAT, "Maximum value must be greater than minimum value.");
+				if (csb.getMaxProgress() < csb.getMinProgress()){
+					csb.setMaxProgress(csb.getMinProgress() + 1);
+				}
+			}
+		}
+		
 		if (props.containsKey(PROPERTY_VALUE)){
 			csb.setProgress(TiConvert.toInt(props.get(PROPERTY_VALUE)));
 		}
@@ -73,11 +100,11 @@ public class View extends TiUIView
 		}
 		
 		if (props.containsKey(PROPERTY_COLOR_FILLED)){
-			csb.setProgressColor(TiConvert.toColor((String) props.get(PROPERTY_COLOR_FILLED)));
+			csb.setProgressColor(TiConvert.toColor(props.getString(PROPERTY_COLOR_FILLED)));
 		}
 		
 		if (props.containsKey(PROPERTY_COLOR_UNFILLED)){
-			csb.setRingBackgroundColor(TiConvert.toColor((String) props.get(PROPERTY_COLOR_UNFILLED)));
+			csb.setRingBackgroundColor(TiConvert.toColor(props.getString(PROPERTY_COLOR_UNFILLED)));
 		}
 		
 		Log.d(LCAT,"[VIEW LIFECYCLE EVENT] processProperties " + props);
