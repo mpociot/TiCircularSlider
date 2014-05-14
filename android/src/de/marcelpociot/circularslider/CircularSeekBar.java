@@ -6,8 +6,6 @@ package de.marcelpociot.circularslider;
  * @date 26 January, 2013
  */
 
-import org.appcelerator.titanium.util.Log;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -53,13 +51,13 @@ public class CircularSeekBar extends View {
 
 	/** The height of the view */
 	private int height;
-	
+
 	/** The padding for the view */
 	private int padding;
-	
+
 	/** The minimum progress amount */
 	private int minProgress = 0;
-	
+
 	/** The maximum progress amount */
 	private int maxProgress = 100;
 
@@ -219,17 +217,19 @@ public class CircularSeekBar extends View {
 	 * Inits the drawable.
 	 */
 	public void initDrawable() {
-		
+
 		progressMark = BitmapFactory.decodeResource(
-				mContext.getResources(), 
-				mContext.getResources().getIdentifier("scrubber_control_normal_holo", "drawable", 
+				mContext.getResources(),
+				mContext.getResources().getIdentifier(
+						"scrubber_control_normal_holo", "drawable",
 						mContext.getPackageName()));
-		
+
 		progressMarkPressed = BitmapFactory.decodeResource(
-				mContext.getResources(), 
-				mContext.getResources().getIdentifier("scrubber_control_pressed_holo", "drawable", 
+				mContext.getResources(),
+				mContext.getResources().getIdentifier(
+						"scrubber_control_pressed_holo", "drawable",
 						mContext.getPackageName()));
-		
+
 		padding = progressMark.getHeight();
 	}
 
@@ -344,7 +344,8 @@ public class CircularSeekBar extends View {
 	public void setAngle(int angle) {
 		this.angle = angle;
 		float donePercent = (((float) this.angle) / 360) * 100;
-		float progress = (donePercent / 100) * (getMaxProgress() - getMinProgress()) + getMinProgress();
+		float progress = (donePercent / 100)
+				* (getMaxProgress() - getMinProgress()) + getMinProgress();
 		setProgressPercent(Math.round(donePercent));
 		CALLED_FROM_ANGLE = true;
 		setProgress(Math.round(progress));
@@ -430,7 +431,7 @@ public class CircularSeekBar extends View {
 	public void setMaxProgress(int maxProgress) {
 		this.maxProgress = maxProgress;
 	}
-	
+
 	/**
 	 * Gets the min progress.
 	 * 
@@ -469,8 +470,9 @@ public class CircularSeekBar extends View {
 		if (this.progress != progress) {
 			this.progress = progress;
 			if (!CALLED_FROM_ANGLE) {
-				int newPercent = (this.progress * 100) / (this.maxProgress - this.minProgress );
-				int newAngle = (newPercent * 360) / 100 ;
+				int newPercent = (this.progress * 100)
+						/ (this.maxProgress - this.minProgress);
+				int newAngle = (newPercent * 360) / 100;
 				this.setAngle(newAngle);
 				this.setProgressPercent(newPercent);
 			}
@@ -478,7 +480,7 @@ public class CircularSeekBar extends View {
 			mListener.onProgressChange(this, this.getProgress());
 			CALLED_FROM_ANGLE = false;
 		}
-		
+
 	}
 
 	/**
@@ -566,14 +568,19 @@ public class CircularSeekBar extends View {
 	 *            the up
 	 */
 	private void moved(float x, float y, boolean up) {
-		float distance = (float) Math.sqrt(Math.pow((x - cx), 2) + Math.pow((y - cy), 2));
-		if (distance < outerRadius + adjustmentFactor && distance > innerRadius - adjustmentFactor && !up) {
+		float distance = (float) Math.sqrt(Math.pow((x - cx), 2)
+				+ Math.pow((y - cy), 2));
+		if (distance < outerRadius + adjustmentFactor
+				&& distance > innerRadius - adjustmentFactor && !up) {
 			IS_PRESSED = true;
 
-			markPointX = (float) (cx + outerRadius * Math.cos(Math.atan2(x - cx, cy - y) - (Math.PI /2)));
-			markPointY = (float) (cy + outerRadius * Math.sin(Math.atan2(x - cx, cy - y) - (Math.PI /2)));
+			markPointX = (float) (cx + outerRadius
+					* Math.cos(Math.atan2(x - cx, cy - y) - (Math.PI / 2)));
+			markPointY = (float) (cy + outerRadius
+					* Math.sin(Math.atan2(x - cx, cy - y) - (Math.PI / 2)));
 
-			float degrees = (float) ((float) ((Math.toDegrees(Math.atan2(x - cx, cy - y)) + 360.0)) % 360.0);
+			float degrees = (float) ((float) ((Math.toDegrees(Math.atan2(
+					x - cx, cy - y)) + 360.0)) % 360.0);
 			// and to make it count 0-360
 			if (degrees < 0) {
 				degrees += 2 * Math.PI;
