@@ -51,10 +51,13 @@ public class CircularSeekBar extends View {
 
 	/** The height of the view */
 	private int height;
-	
+
 	/** The padding for the view */
 	private int padding;
-	
+
+	/** The minimum progress amount */
+	private int minProgress = 0;
+
 	/** The maximum progress amount */
 	private int maxProgress = 100;
 
@@ -214,17 +217,19 @@ public class CircularSeekBar extends View {
 	 * Inits the drawable.
 	 */
 	public void initDrawable() {
-		
+
 		progressMark = BitmapFactory.decodeResource(
-				mContext.getResources(), 
-				mContext.getResources().getIdentifier("scrubber_control_normal_holo", "drawable", 
+				mContext.getResources(),
+				mContext.getResources().getIdentifier(
+						"scrubber_control_normal_holo", "drawable",
 						mContext.getPackageName()));
-		
+
 		progressMarkPressed = BitmapFactory.decodeResource(
-				mContext.getResources(), 
-				mContext.getResources().getIdentifier("scrubber_control_pressed_holo", "drawable", 
+				mContext.getResources(),
+				mContext.getResources().getIdentifier(
+						"scrubber_control_pressed_holo", "drawable",
 						mContext.getPackageName()));
-		
+
 		padding = progressMark.getHeight();
 	}
 
@@ -240,10 +245,7 @@ public class CircularSeekBar extends View {
 		width = getWidth(); // Get View Width
 		height = getHeight();// Get View Height
 
-		int size = (width > height) ? height : width; // Choose the smaller
-														// between width and
-														// height to make a
-														// square
+		int size = ((width > height) ? height : width) - 25;
 
 		cx = width / 2; // Center X for circle
 		cy = height / 2; // Center Y for circle
@@ -342,7 +344,8 @@ public class CircularSeekBar extends View {
 	public void setAngle(int angle) {
 		this.angle = angle;
 		float donePercent = (((float) this.angle) / 360) * 100;
-		float progress = (donePercent / 100) * getMaxProgress();
+		float progress = (donePercent / 100)
+				* (getMaxProgress() - getMinProgress()) + getMinProgress();
 		setProgressPercent(Math.round(donePercent));
 		CALLED_FROM_ANGLE = true;
 		setProgress(Math.round(progress));
@@ -384,16 +387,6 @@ public class CircularSeekBar extends View {
 	 */
 	public void setBarWidth(int barWidth) {
 		this.barWidth = barWidth;
-	}
-	
-	/**
-	 * Sets the barColor.
-	 * 
-	 * @param barWidth
-	 *            the new bar width
-	 */
-	public void setBarColor(int barWidth) {
-		
 	}
 
 	/**
@@ -440,6 +433,25 @@ public class CircularSeekBar extends View {
 	}
 
 	/**
+	 * Gets the min progress.
+	 * 
+	 * @return the min progress
+	 */
+	public int getMinProgress() {
+		return minProgress;
+	}
+
+	/**
+	 * Sets the min progress.
+	 * 
+	 * @param minProgress
+	 *            the new min progress
+	 */
+	public void setMinProgress(int minProgress) {
+		this.minProgress = minProgress;
+	}
+
+	/**
 	 * Gets the progress.
 	 * 
 	 * @return the progress
@@ -458,14 +470,17 @@ public class CircularSeekBar extends View {
 		if (this.progress != progress) {
 			this.progress = progress;
 			if (!CALLED_FROM_ANGLE) {
-				int newPercent = (this.progress / this.maxProgress) * 100;
-				int newAngle = (newPercent / 100) * 360;
+				int newPercent = (this.progress * 100)
+						/ (this.maxProgress - this.minProgress);
+				int newAngle = (newPercent * 360) / 100;
 				this.setAngle(newAngle);
 				this.setProgressPercent(newPercent);
 			}
+			this.invalidate();
 			mListener.onProgressChange(this, this.getProgress());
 			CALLED_FROM_ANGLE = false;
 		}
+
 	}
 
 	/**
@@ -553,14 +568,19 @@ public class CircularSeekBar extends View {
 	 *            the up
 	 */
 	private void moved(float x, float y, boolean up) {
-		float distance = (float) Math.sqrt(Math.pow((x - cx), 2) + Math.pow((y - cy), 2));
-		if (distance < outerRadius + adjustmentFactor && distance > innerRadius - adjustmentFactor && !up) {
+		float distance = (float) Math.sqrt(Math.pow((x - cx), 2)
+				+ Math.pow((y - cy), 2));
+		if (distance < outerRadius + adjustmentFactor
+				&& distance > innerRadius - adjustmentFactor && !up) {
 			IS_PRESSED = true;
 
-			markPointX = (float) (cx + outerRadius * Math.cos(Math.atan2(x - cx, cy - y) - (Math.PI /2)));
-			markPointY = (float) (cy + outerRadius * Math.sin(Math.atan2(x - cx, cy - y) - (Math.PI /2)));
+			markPointX = (float) (cx + outerRadius
+					* Math.cos(Math.atan2(x - cx, cy - y) - (Math.PI / 2)));
+			markPointY = (float) (cy + outerRadius
+					* Math.sin(Math.atan2(x - cx, cy - y) - (Math.PI / 2)));
 
-			float degrees = (float) ((float) ((Math.toDegrees(Math.atan2(x - cx, cy - y)) + 360.0)) % 360.0);
+			float degrees = (float) ((float) ((Math.toDegrees(Math.atan2(
+					x - cx, cy - y)) + 360.0)) % 360.0);
 			// and to make it count 0-360
 			if (degrees < 0) {
 				degrees += 2 * Math.PI;
