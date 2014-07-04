@@ -1,39 +1,94 @@
-# TiCircularSlide Module
+TiCircularSlider
+===========================================
 
-## Description
 
-TODO: Enter your module description here
+Circular slider with many customizations.
+Wrapper module for EFCircularSlider.
 
-## Accessing the TiCircularSlide Module
+<img src="images/demo.gif" />
 
-To access this module from JavaScript, you would do the following:
+### Usage
 
-	var TiCircularSlide = require("de.marcelpociot.circularslider");
+TiCircularProgress is pretty much a ProgressView replacement.
 
-The TiCircularSlide variable is a reference to the Module object.	
+	var TiCircularSlider = require('de.marcelpociot.circularslider');
 
-## Reference
+	var sliderView = TiCircularSlider.createView({
+		top: 200,
+		left: 50,
+		height: 250,
+		width: 250,
+		lineWidth: 5,
+		handleColor: 'red',
+		filledColor: '#d7d7d7',
+		unfilledColor: '#black'
+	});
+	sliderView.addEventListener('change',function(e)
+	{
+		Ti.API.info( "Value is: ", e.value );
+	});
+	win.add( sliderView );
+	
 
-TODO: If your module has an API, you should document
-the reference here.
+## Options
 
-### ___PROJECTNAMEASIDENTIFIER__.function
 
-TODO: This is an example of a module function.
+#### lineWidth
 
-### ___PROJECTNAMEASIDENTIFIER__.property
+Type: `Float`  
+Default: `5`
 
-TODO: This is an example of a module property.
+The circle's line width.
 
-## Usage
 
-TODO: Enter your usage example here
+#### minimumValue
 
-## Author
+Type: `Float`  
+Default: `0.0`
 
-TODO: Enter your author name, email and other contact
-details you want to share here. 
 
-## License
+#### maximumValue
 
-TODO: Enter your license/legal information here.
+Type: `Float`  
+Default: `100.0`
+
+#### handleColor
+
+Type: `Color`  
+Default: `red`
+
+Color for the slider handle.
+
+
+#### filledColor
+
+Type: `Color`  
+Default: `red`
+
+Color for the filled (selected) area of the slider.
+
+#### unfilledColor
+
+Type: `Color`  
+Default: `black`
+
+Color for the unfilled (unselected) area of the slider.
+
+## Events
+
+### change
+Fired everytime the selection changes.
+
+##### value
+Type: `Float`   
+The current selected value
+
+
+ABOUT THE AUTHOR
+========================
+I'm a web enthusiast located in Germany and in charge of http://www.titaniumcontrols.com
+
+Follow me on twitter: @marcelpociot / @TitaniumCTRLs
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/mpociot/ticircularslider/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+

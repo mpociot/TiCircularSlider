@@ -1,39 +1,51 @@
-# android Module
+TiCircularSlider
+===========================================
 
-## Description
 
-TODO: Enter your module description here
+Circular slider with many customizations.
+Wrapper module for AndroidCircularSeekBar.
 
-## Accessing the android Module
+![demo](images/demo.gif)
 
-To access this module from JavaScript, you would do the following:
+### Usage
 
-	var android = require("de.marcelpociot.circularslider");
+```javascript
+var TiCircularSlider = require('de.marcelpociot.circularslider');
 
-The android variable is a reference to the Module object.	
+var sliderView = TiCircularSlider.createView({
+	height: 250,
+	width: 250,
+	lineWidth: 5,
+	filledColor: 'blue',
+	unfilledColor: 'grey'
+});
+sliderView.addEventListener('change',function(e)
+{
+	Ti.API.info( "Value is: ", e.value );
+});
+win.add( sliderView );
+```
 
-## Reference
+### License
 
-TODO: If your module has an API, you should document
-the reference here.
+	The MIT License (MIT)
 
-### ___PROJECTNAMEASIDENTIFIER__.function
+	Copyright (c) 2014 Manuel Lehner
 
-TODO: This is an example of a module function.
+	Permission is hereby granted, free of charge, to any person obtaining a copy
+	of this software and associated documentation files (the "Software"), to deal
+	in the Software without restriction, including without limitation the rights
+	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	copies of the Software, and to permit persons to whom the Software is
+	furnished to do so, subject to the following conditions:
 
-### ___PROJECTNAMEASIDENTIFIER__.property
+	The above copyright notice and this permission notice shall be included in
+	all copies or substantial portions of the Software.
 
-TODO: This is an example of a module property.
-
-## Usage
-
-TODO: Enter your usage example here
-
-## Author
-
-TODO: Enter your author name, email and other contact
-details you want to share here. 
-
-## License
-
-TODO: Enter your license/legal information here.
+	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+	THE SOFTWARE.
