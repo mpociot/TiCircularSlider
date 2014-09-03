@@ -4,14 +4,14 @@
 #
 version: 1.0.1
 apiversion: 2
-description: My module
+description: Circular slider with many customizations
 author: Manuel Lehner
 license: MIT
 copyright: 2014
 
 
 # these should not be edited
-name: android
+name: TiCircularSlider
 moduleid: de.marcelpociot.circularslider
 guid: 92ea5ecb-d462-433c-9967-90275ff0e99f
 platform: android

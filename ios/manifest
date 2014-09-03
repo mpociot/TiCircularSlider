@@ -4,14 +4,14 @@
 #
 version: 1.0
 apiversion: 2
-description: My module
+description: Circular slider with many customizations
 author: Marcel Pociot
 license: MIT
 copyright: Marcel Pociot
 
 
 # these should not be edited
-name: TiCircularSlide
+name: TiCircularSlider
 moduleid: de.marcelpociot.circularslider
 guid: ecae907d-2ade-46aa-9cc5-346d32c5b0f3
 platform: iphone
