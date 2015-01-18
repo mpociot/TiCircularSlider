@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>C0D386F6-22E3-4C0E-995E-095B9514E20D</string>
+	<key>IDESourceControlProjectName</key>
+	<string>TiCircularSlide</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>D95FEB8EA29486930BDDFF666F72E9F476E33FEC</key>
+		<string>github.com:mpociot/TiCircularSlider.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ios/TiCircularSlide.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>D95FEB8EA29486930BDDFF666F72E9F476E33FEC</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:mpociot/TiCircularSlider.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>D95FEB8EA29486930BDDFF666F72E9F476E33FEC</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D95FEB8EA29486930BDDFF666F72E9F476E33FEC</string>
+			<key>IDESourceControlWCCName</key>
+			<string>TiCircularSlider</string>
+		</dict>
+	</array>
+</dict>
+</plist>
