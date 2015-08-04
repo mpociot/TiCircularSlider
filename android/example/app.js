@@ -1,39 +1,18 @@
-// This is a test harness for your module
-// You should do something interesting in this harness 
-// to test out the module and to provide instructions 
-// to users on how to use it by example.
-
-
-// open a single window
 var win = Ti.UI.createWindow({
 	backgroundColor:'white'
 });
-var label = Ti.UI.createLabel();
-win.add(label);
+var TiCircularSlider = require('de.marcelpociot.circularslider');
+
+var sliderView = TiCircularSlider.createView({
+    height: 250,
+    width: 250,
+    lineWidth: 5,
+    filledColor: 'blue',
+    unfilledColor: 'grey'
+});
+sliderView.addEventListener('change',function(e)
+{
+    Ti.API.info( "Value is: ", e.value );
+});
+win.add( sliderView );
 win.open();
-
-// TODO: write your module tests here
-var android = require('de.marcelpociot.circularslider');
-Ti.API.info("module is => " + android);
-
-label.text = android.example();
-
-Ti.API.info("module exampleProp is => " + android.exampleProp);
-android.exampleProp = "This is a test value";
-
-if (Ti.Platform.name == "android") {
-	var proxy = android.createExample({
-		message: "Creating an example Proxy",
-		backgroundColor: "red",
-		width: 100,
-		height: 100,
-		top: 100,
-		left: 150
-	});
-
-	proxy.printMessage("Hello world!");
-	proxy.message = "Hi world!.  It's me again.";
-	proxy.printMessage("Hello world!");
-	win.add(proxy);
-}
-
