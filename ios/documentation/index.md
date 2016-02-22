@@ -59,7 +59,6 @@ Default: `red`
 
 Color for the slider handle.
 
-
 #### filledColor
 
 Type: `Color`  
@@ -74,10 +73,47 @@ Default: `black`
 
 Color for the unfilled (unselected) area of the slider.
 
+#### labelFont
+
+Type: `String`  
+Default: (system-provided font-family)
+
+Font of the inner marking labels within the circle.
+
+#### labelColor
+
+Type: `Color`  
+Default: `Black`
+
+Color of the inner marking labels within the circle.
+
+#### labelDisplacement
+
+Type: `Float`  
+Default: `0`
+
+Value with which to displace all labels along radial line from center to slider circumference.
+Note: A negative value will move the label closer to the center. A positive value will move the 
+label closer to the circumference
+
 ## Events
 
 ### change
 Fired everytime the selection changes.
+
+##### value
+Type: `Float`   
+The current selected value
+
+### touchstart
+Fired everytime the selection starts.
+
+##### value
+Type: `Float`   
+The current selected value
+
+### touchend
+Fired everytime the selection stops.
 
 ##### value
 Type: `Float`   

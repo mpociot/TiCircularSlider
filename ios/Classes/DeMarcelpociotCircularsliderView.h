@@ -9,9 +9,7 @@
 #import "EFCircularSlider.h"
 
 @interface DeMarcelpociotCircularsliderView : TiUIView {
-
     EFCircularSlider* sliderView;
-    
 }
 
 @end

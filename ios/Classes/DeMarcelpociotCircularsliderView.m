@@ -17,6 +17,8 @@
         sliderView = [[EFCircularSlider alloc] initWithFrame:[self frame]];
         [self addSubview:sliderView];
         [sliderView addTarget:self.proxy action:@selector(valueChanged:) forControlEvents:UIControlEventValueChanged];
+        [sliderView addTarget:self.proxy action:@selector(touchStarted:) forControlEvents:UIControlEventTouchDown];
+        [sliderView addTarget:self.proxy action:@selector(touchEnded:) forControlEvents:UIControlEventTouchUpInside];
     }
     return sliderView;
 }
@@ -42,10 +44,21 @@
         [sliderView setHandleColor:oldSlider.handleColor];
         [sliderView setUnfilledColor:oldSlider.unfilledColor];
         [sliderView setFilledColor:oldSlider.filledColor];
+
+        [sliderView setLabelFont:oldSlider.labelFont];
+        [sliderView setLabelColor:oldSlider.labelColor];
+        [sliderView setLabelDisplacement:oldSlider.labelDisplacement];
+        
+        // Event: "change"
         [sliderView addTarget:self.proxy action:@selector(valueChanged:) forControlEvents:UIControlEventValueChanged];
+        
+        // Event: "touchstart"
+        [sliderView addTarget:self.proxy action:@selector(touchStarted:) forControlEvents:UIControlEventTouchDown];
+        
+        // Event: "touchend"
+        [sliderView addTarget:self.proxy action:@selector(touchEnded:) forControlEvents:UIControlEventTouchUpInside];
     }
 }
-
 
 -(void)setMinimumValue_:(id)minimum
 {
@@ -87,11 +100,26 @@
     [[self sliderView] setInnerMarkingLabels:value];
 }
 
-MAKE_SYSTEM_PROP(BIG_CIRCLE, EFBigCircle);
-MAKE_SYSTEM_PROP(SEMI_TRANSPARENT_WHITE_CIRCLE, EFSemiTransparentWhiteCircle);
-MAKE_SYSTEM_PROP(SEMI_TRANSPARENT_BLACK_CIRCLE, EFSemiTransparentBlackCircle);
-MAKE_SYSTEM_PROP(DOUBLE_CIRCLE_OPEN_CENTER, EFDoubleCircleWithClosedCenter);
-MAKE_SYSTEM_PROP(DOUBLE_CIRCLE_CLOSED_CENTER, EFDoubleCircleWithClosedCenter);
+-(void)setLabelFont_:(id)value
+{
+    [[self sliderView] setLabelFont:[TiUtils fontValue:value].font];
+}
+
+-(void)setLabelColor_:(id)value
+{
+    [[self sliderView] setLabelColor:[TiUtils colorValue:value].color];
+}
+
+-(void)setLabelDisplacement_:(id)value
+{
+    [[self sliderView] setLabelDisplacement:[TiUtils floatValue:value]];
+}
+
+MAKE_SYSTEM_PROP(BIG_CIRCLE, CircularSliderHandleTypeBigCircle);
+MAKE_SYSTEM_PROP(SEMI_TRANSPARENT_WHITE_CIRCLE, CircularSliderHandleTypeSemiTransparentWhiteCircle);
+MAKE_SYSTEM_PROP(SEMI_TRANSPARENT_BLACK_CIRCLE, CircularSliderHandleTypeSemiTransparentBlackCircle);
+MAKE_SYSTEM_PROP(DOUBLE_CIRCLE_OPEN_CENTER, CircularSliderHandleTypeDoubleCircleWithOpenCenter);
+MAKE_SYSTEM_PROP(DOUBLE_CIRCLE_CLOSED_CENTER, CircularSliderHandleTypeDoubleCircleWithClosedCenter);
 
 -(void)setHandleType_:(id)value
 {

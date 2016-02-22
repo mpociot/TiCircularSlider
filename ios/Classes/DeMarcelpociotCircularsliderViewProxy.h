@@ -12,5 +12,7 @@
 }
 
 -(void)valueChanged:(EFCircularSlider*)slider;
+-(void)touchStarted:(EFCircularSlider*)slider;
+-(void)touchEnded:(EFCircularSlider*)slider;
 
 @end
