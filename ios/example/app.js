@@ -13,11 +13,27 @@ var sliderView = TiCircularSlider.createView({
 	filledColor: '#d7d7d7',
 	unfilledColor: '#black'
 });
-sliderView.addEventListener('change',function(e)
-{
+
+sliderView.addEventListener('change',function(e) {
+    Ti.API.warn("change");
 	sliderValue.text = Math.round( e.value );
 });
+
+sliderView.addEventListener('touchstart',function(e) {
+    Ti.API.warn("touchstart");
+	sliderValue.text = Math.round( e.value );
+});
+
+sliderView.addEventListener('touchend',function(e) {
+    Ti.API.warn("touchend");
+	sliderValue.text = Math.round( e.value );
+});
+
 win.add( sliderView );
+
+win.addEventListener("open", function() {
+    sliderView.setValue(50);
+});
 
 var sliderValue = Ti.UI.createLabel({
 	top: 40,

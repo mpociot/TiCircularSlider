@@ -11,10 +11,21 @@
 @implementation DeMarcelpociotCircularsliderViewProxy
 
 -(void)valueChanged:(EFCircularSlider*)slider {
-    NSNumber* currentValue = [NSNumber numberWithFloat:slider.currentValue];
     [self fireEvent:@"change" withObject:@{
-                                           @"value":currentValue
-                                           }];
+        @"value": NUMFLOAT([slider currentValue])
+    }];
+}
+
+-(void)touchStarted:(EFCircularSlider*)slider {
+    [self fireEvent:@"touchstart" withObject:@{
+        @"value": NUMFLOAT([slider currentValue])
+    }];
+}
+
+-(void)touchEnded:(EFCircularSlider*)slider {
+    [self fireEvent:@"touchend" withObject:@{
+        @"value": NUMFLOAT([slider currentValue])
+    }];
 }
 
 @end
