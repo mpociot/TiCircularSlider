@@ -11,21 +11,27 @@
 @implementation DeMarcelpociotCircularsliderViewProxy
 
 -(void)valueChanged:(EFCircularSlider*)slider {
-    [self fireEvent:@"change" withObject:@{
-        @"value": NUMFLOAT([slider currentValue])
-    }];
+    if ([self _hasListeners:@"change"]) {
+        [self fireEvent:@"change" withObject:@{
+            @"value": NUMFLOAT([slider currentValue])
+        }];
+    }
 }
 
 -(void)touchStarted:(EFCircularSlider*)slider {
-    [self fireEvent:@"touchstart" withObject:@{
-        @"value": NUMFLOAT([slider currentValue])
-    }];
+    if ([self _hasListeners:@"touchstart"]) {
+        [self fireEvent:@"touchstart" withObject:@{
+            @"value": NUMFLOAT([slider currentValue])
+        }];
+    }
 }
 
 -(void)touchEnded:(EFCircularSlider*)slider {
-    [self fireEvent:@"touchend" withObject:@{
-        @"value": NUMFLOAT([slider currentValue])
-    }];
+    if ([self _hasListeners:@"touchend"]) {
+        [self fireEvent:@"touchend" withObject:@{
+            @"value": NUMFLOAT([slider currentValue])
+        }];
+    }
 }
 
 @end

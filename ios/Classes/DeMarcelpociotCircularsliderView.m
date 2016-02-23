@@ -16,9 +16,6 @@
         NSLog(@"INITIALIZING VIEW %@",[self frame]);
         sliderView = [[EFCircularSlider alloc] initWithFrame:[self frame]];
         [self addSubview:sliderView];
-        [sliderView addTarget:self.proxy action:@selector(valueChanged:) forControlEvents:UIControlEventValueChanged];
-        [sliderView addTarget:self.proxy action:@selector(touchStarted:) forControlEvents:UIControlEventTouchDown];
-        [sliderView addTarget:self.proxy action:@selector(touchEnded:) forControlEvents:UIControlEventTouchUpInside];
     }
     return sliderView;
 }
@@ -53,10 +50,10 @@
         [sliderView addTarget:self.proxy action:@selector(valueChanged:) forControlEvents:UIControlEventValueChanged];
         
         // Event: "touchstart"
-        [sliderView addTarget:self.proxy action:@selector(touchStarted:) forControlEvents:UIControlEventTouchDown];
+        [sliderView addTarget:self.proxy action:@selector(touchStarted:) forControlEvents:UIControlEventTouchDragEnter];
         
         // Event: "touchend"
-        [sliderView addTarget:self.proxy action:@selector(touchEnded:) forControlEvents:UIControlEventTouchUpInside];
+        [sliderView addTarget:self.proxy action:@selector(touchEnded:) forControlEvents:UIControlEventTouchDragExit];
     }
 }
 
