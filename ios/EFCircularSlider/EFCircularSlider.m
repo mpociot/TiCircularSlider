@@ -511,7 +511,7 @@ static const CGFloat kFitFrameRadius = -1.0;
     [super beginTrackingWithTouch:touch withEvent:event];
     
     if (![self moving]) {
-        [self sendActionsForControlEvents:UIControlEventTouchDown];
+        [self sendActionsForControlEvents:UIControlEventTouchDragEnter];
     }
     
     return YES;
@@ -542,9 +542,9 @@ static const CGFloat kFitFrameRadius = -1.0;
         {
             CGFloat percentageAlongCircle = i/(float)labelsCount;
             CGFloat degreesForLabel       = percentageAlongCircle * 360;
-            if(abs(self.angleFromNorth - degreesForLabel) < minDist)
+            if(fabs(self.angleFromNorth - degreesForLabel) < minDist)
             {
-                minDist = abs(self.angleFromNorth - degreesForLabel);
+                minDist = fabs(self.angleFromNorth - degreesForLabel);
                 bestGuessPoint = [self pointOnCircleAtAngleFromNorth:degreesForLabel];
             }
         }
@@ -553,7 +553,7 @@ static const CGFloat kFitFrameRadius = -1.0;
         [self setNeedsDisplay];
     }
     [self setMoving:NO];
-    [self sendActionsForControlEvents:UIControlEventTouchUpInside];
+    [self sendActionsForControlEvents:UIControlEventTouchDragExit];
 }
 
 -(void)moveHandle:(CGPoint)point
